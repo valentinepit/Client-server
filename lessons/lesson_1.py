@@ -72,11 +72,31 @@ def file_encoding_detect(_name):
     return encoding
 
 
+def main():
+    while True:
+        try:
+            task = int(input('Введите номер задачи. Для выхода введите 0: '))
+        except ValueError:
+            print("Номера задач от 1 до 6")
+            continue
+        if task == 1:
+            task_1()
+        elif task == 2:
+            print("К сожалению вторая задача не решена")
+        elif task == 3:
+            task_3()
+        elif task == 4:
+            task_4()
+        elif task == 5:
+            task_5()
+        elif task == 6:
+            task_6()
+        elif task == 0:
+            break
+        else:
+            print("Номера задач от 1 до 6")
+
+
 if __name__ == "__main__":
-    task_1()
-    # К сожалению не удалось найти решение ко второй задаче
-    # task_2()
-    # task_3()
-    # task_4()
-    # task_5()
-    # task_6()
+    main()
+
