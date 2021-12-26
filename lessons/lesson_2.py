@@ -1,10 +1,13 @@
+import csv
+import json
+import re
 from datetime import datetime
-from typing import List, Dict
+from typing import List
+
+import yaml
+from yaml import Loader
 
 from utils import file_encoding_detect
-import csv
-import re
-import json
 
 
 class Task1:
@@ -110,18 +113,40 @@ class Task2:
 
 
 class Task3:
-    def a_task(self):
-        pass
+    path = '../data/file.yaml'
 
-    def b_task(self):
-        pass
+    def write_to_yaml(self):
+        row_data = [[12,
+                     "value",
+                     "значение"
+                     ],
+                    256,
+                    {"first": "value",
+                     "second": "value"
+                     },
+                    ]
+        data_to_yaml = {"Номер_" + str(i): row_data[i] for i in range(len(row_data))}
+        with open(self.path, 'w') as f_n:
+            yaml.dump(data_to_yaml, f_n, allow_unicode=True, default_flow_style=False)
+        data_from_yaml = self.read_from_yaml()
+        self.check_data(data_to_yaml, data_from_yaml)
+
+    def read_from_yaml(self):
+        with open(self.path, 'r') as f_n:
+            return yaml.load(f_n, Loader=Loader)
+
+    def check_data(self, a, b):
+        print(f"data_to_yaml = {a}\ndata_from_yaml = {b}")
+        print(f"Результат сравнения этих двух наборов данных: \n{a == b}")
 
 
 def main():
-    # task = Task1()
-    # task.write_to_csv()
-    task = Task2()
-    task.write_order_to_json()
+    task = Task1()
+    task.write_to_csv()
+    # task = Task2()
+    # task.write_order_to_json()
+    # task = Task3()
+    # task.write_to_yaml()
 
 
 if __name__ == "__main__":
