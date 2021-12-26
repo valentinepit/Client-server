@@ -1,3 +1,6 @@
+from lessons.utils import file_encoding_detect
+
+
 def task_1():
     words = {"разработка": "\u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430",
              "сокет": "\u0441\u043e\u043a\u0435\u0442",
@@ -61,15 +64,10 @@ def task_6():
     encoding = file_encoding_detect(name)
     with open(name, encoding=encoding) as f:
         content = f.read()
-    print(content)
+    return content
 
 
-def file_encoding_detect(_name):
-    from chardet import detect
-    with open(_name, 'rb') as f:
-        content = f.read()
-    encoding = detect(content)['encoding']
-    return encoding
+
 
 
 def main():
