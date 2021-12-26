@@ -1,6 +1,10 @@
+from datetime import datetime
+from typing import List, Dict
+
 from utils import file_encoding_detect
 import csv
 import re
+import json
 
 
 class Task1:
@@ -18,7 +22,7 @@ class Task1:
         self.os_code_list = []
         self.os_type_list = []
 
-    def get_data(self):
+    def get_data(self) -> List:
         data = []
         for i in range(1, self.file_number + 1):
             file_name = self.path + '_' + str(i) + '.txt'
@@ -61,11 +65,48 @@ class Task1:
 
 
 class Task2:
-    def a_task(self):
-        pass
+    path = '../data/orders.json'
 
-    def b_task(self):
-        pass
+    def write_order_to_json(self):
+        with open(self.path, "r") as f_n:
+            objs = json.load(f_n)
+        while True:
+            data = self.get_data()
+            if data:
+                objs["orders"].append(data)
+            else:
+                with open(self.path, "w") as f_n:
+                    json.dump(objs, f_n, ensure_ascii=False, indent=4)
+                break
+
+    def get_data(self):
+        now = datetime.today().strftime('%m/%d/%Y')
+        test_data = {"item": "Телевизор",
+                     "quantity": 1,
+                     "price": 15000,
+                     "buyer": "Петров",
+                     "date": now}
+        print(
+            "Введите данные для записи. Для использования тестового"
+            " набора введите test, для окончания введите end")
+        item = input("Введите название товара: ")
+        if item == "test":
+            return test_data
+        elif item == "end":
+            return
+        try:
+            quantity = int(input("Введите количество товара: "))
+            price = float(input("Введите цену товара: "))
+        except:
+            print("Попробуйте снова")
+            return
+        buyer = input("Введите фамилию покупателя: ")
+        data = {"item": item,
+                "quantity": quantity,
+                "price": price,
+                "buyer": buyer,
+                "date": now}
+        return data
 
 
 class Task3:
@@ -77,8 +118,10 @@ class Task3:
 
 
 def main():
-    task = Task1()
-    task.write_to_csv()
+    # task = Task1()
+    # task.write_to_csv()
+    task = Task2()
+    task.write_order_to_json()
 
 
 if __name__ == "__main__":
