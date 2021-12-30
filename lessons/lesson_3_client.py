@@ -48,6 +48,8 @@ class Client:
 
 def main():
     address, port = get_address_and_port(sys.argv)
+    if not address:
+        sys.exit(1)
     client = Client(address, port)
     client.check_server()
 

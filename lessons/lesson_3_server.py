@@ -45,6 +45,8 @@ class Server:
 
 def main():
     address, port = get_address_and_port(sys.argv)
+    if not address:
+        sys.exit(1)
     server = Server(address, port)
     server.get_client_message()
 
