@@ -7,7 +7,7 @@ from typing import List
 import yaml
 from yaml import Loader
 
-from utils import file_encoding_detect
+from common.utils import file_encoding_detect
 
 
 class Task1:
