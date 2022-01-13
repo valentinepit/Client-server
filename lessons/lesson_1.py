@@ -1,4 +1,4 @@
-from lessons.utils import file_encoding_detect
+from common.utils import file_encoding_detect
 
 
 def task_1():
