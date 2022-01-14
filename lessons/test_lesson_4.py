@@ -7,12 +7,7 @@ from lesson_3_server import Server
 
 
 class ClientServerTest(unittest.TestCase):
-
-    def setUp(self):
-        # Предварительная настройка
-        self.client = Client('127.0.0.1', 7777)
-        self.server = Server('127.0.0.1', 7777)
-        self.params = {
+    params = {
             'error_msg': '400: Bad Request',
             'ok_msg': '200 : OK',
             'ok_response': {'response': 200},
@@ -26,6 +21,11 @@ class ClientServerTest(unittest.TestCase):
                 config.ERROR: 'Bad Request'
             }
         }
+
+    def setUp(self):
+        # Предварительная настройка
+        self.client = Client('127.0.0.1', 7777)
+        self.server = Server('127.0.0.1', 7777)
 
     def tearDown(self):
         # Выполнить завершающие действия (если необходимо)

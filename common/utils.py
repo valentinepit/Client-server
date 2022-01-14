@@ -13,6 +13,8 @@ def file_encoding_detect(_name):
 
 
 def send_msg(socket, msg):
+    if not isinstance(msg, dict):
+        raise TypeError
     js_msg = json.dumps(msg)
     socket.send(js_msg.encode(ENCODING))
 
