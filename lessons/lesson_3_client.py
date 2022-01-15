@@ -3,7 +3,7 @@ import sys
 import time
 from socket import socket, AF_INET, SOCK_STREAM
 
-from common.config import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE
+from common.config import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, ERROR
 from common.utils import send_msg, receive_msg, get_address_and_port
 
 
