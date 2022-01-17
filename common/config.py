@@ -14,5 +14,7 @@ RESPONSE = 'response'
 ERROR = 'error'
 RESPONSE_DEFAULT_IP_ADDRESS = 'response_default_ip_address'
 
+LOGGING_LEVEL = 'DEBUG'
+
 
 
