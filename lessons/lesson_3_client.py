@@ -6,6 +6,7 @@ import logging
 from log import log_conf
 
 from common.config import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, ERROR
+from common.errors import ReqFileMissingError
 from common.utils import send_msg, receive_msg, get_address_and_port
 
 log = logging.getLogger('client')
