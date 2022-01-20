@@ -21,7 +21,8 @@ def log(func):
         code_obj_name = code_obj.co_name
         current_log = log_c if 'client.py' in str(code_obj) else log_s
         cur_time = time.ctime(time.time())
-        current_log.info(f" {cur_time} функция {func.__name__} вызвана из {code_obj_name}")
+        current_log.info(f" {cur_time} функция {func.__name__} вызвана из "
+                         f"{code_obj_name} с аргументами: {args}")
         _fn = func(*args, **kwargs)
         return _fn
 
