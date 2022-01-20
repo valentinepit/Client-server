@@ -1,7 +1,31 @@
 import json
+import time
+from functools import wraps
 from typing import List
+import inspect
 
 from common.config import MAX_PACKAGE_LENGTH, ENCODING, DEFAULT_PORT, DEFAULT_IP_ADDRESS
+import logging
+from log import log_conf
+
+log_s = logging.getLogger('server')
+log_c = logging.getLogger('client')
+
+
+def log(func):
+    @wraps(func)
+    def wrap(*args, **kwargs):
+        current_frame = inspect.currentframe()
+        caller_frame = current_frame.f_back
+        code_obj = caller_frame.f_code
+        code_obj_name = code_obj.co_name
+        current_log = log_c if 'client.py' in str(code_obj) else log_s
+        cur_time = time.ctime(time.time())
+        current_log.info(f" {cur_time} функция {func.__name__} вызвана из {code_obj_name}")
+        _fn = func(*args, **kwargs)
+        return _fn
+
+    return wrap
 
 
 def file_encoding_detect(_name):
@@ -12,6 +36,7 @@ def file_encoding_detect(_name):
     return encoding
 
 
+@log
 def send_msg(socket, msg):
     if not isinstance(msg, dict):
         raise TypeError

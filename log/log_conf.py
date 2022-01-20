@@ -4,7 +4,7 @@ from logging.handlers import TimedRotatingFileHandler
 from common.config import LOGGING_LEVEL
 
 log_server = logging.getLogger('server')
-server_formatter = logging.Formatter("%(asctime)s - %(levelname)8s  %(filename)s - %(message)s  ")
+server_formatter = logging.Formatter("%(asctime)s - %(levelname)8s - %(message)s  ")
 server_path = os.path.dirname(os.path.abspath(__file__))
 server_path = os.path.join(server_path, 'server.log')
 file_hand = TimedRotatingFileHandler(server_path, encoding='utf8', interval=1, when='D')
