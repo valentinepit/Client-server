@@ -1,10 +1,9 @@
-import sys
-import os
-import unittest
 import json
-sys.path.append(os.path.join(os.getcwd(), '..'))
+import unittest
+
 from common import config
 from common.utils import receive_msg, send_msg
+
 
 class TestSocket:
     encoded_msg = None
