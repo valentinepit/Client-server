@@ -39,6 +39,7 @@ class Client:
             loggger.critical(f"Не удается подключиться к серверу {self.server_address}:{self.server_port}")
         except ReqFileMissingError as error:
             loggger.error(f"В ответе сервера отсутствует необходимое поле {error}")
+        transport.close()
 
     @log
     def create_presence(self, account_name="Guest"):
