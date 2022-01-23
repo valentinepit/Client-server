@@ -26,10 +26,12 @@ class ClientServerTest(unittest.TestCase):
         # Предварительная настройка
         self.client = Client('127.0.0.1', 7777)
         self.server = Server('127.0.0.1', 7777)
+        self.transport = None
 
     def tearDown(self):
         # Выполнить завершающие действия (если необходимо)
-        pass
+        if self.transport:
+            self.transport.close()
 
     def test_presence_valid(self):
         # "Проверка запроса на корректность"
@@ -62,7 +64,9 @@ class ClientServerTest(unittest.TestCase):
         # Проверка транспорта клиента
         server_transport = self.server.get_transport()
         server_transport.listen(config.MAX_CONNECTION)
-        self.assertIsInstance(self.client.get_transport(), socket)
+        self.transport = self.client.get_transport()
+        self.assertIsInstance(self.transport, socket)
+        server_transport.close()
 
     def test_check_server_transport(self):
         # Проверка транспорта сервера
