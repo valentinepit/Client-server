@@ -2,8 +2,8 @@ import unittest
 from socket import socket
 
 from common import config
-from lesson_3_client import Client
-from lesson_3_server import Server
+from client import Client
+from server import Server
 
 
 class ClientServerTest(unittest.TestCase):

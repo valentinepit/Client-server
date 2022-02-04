@@ -45,6 +45,7 @@ def send_msg(socket, msg):
     socket.send(js_msg.encode(ENCODING))
 
 
+@log
 def receive_msg(client):
     encoded_response = client.recv(MAX_PACKAGE_LENGTH)
     if isinstance(encoded_response, bytes):
@@ -56,6 +57,7 @@ def receive_msg(client):
     raise ValueError
 
 
+@log
 def get_address_and_port(params: List):
     try:
         if '-a' in params:
@@ -78,4 +80,14 @@ def get_address_and_port(params: List):
     except ValueError:
         print('Порт может быть в диапазоне от 1024 до 65535')
         return None, None
-    return address, port
+
+    try:
+        if '-m' in params:
+            mode = params[params.index('-m') + 1]
+        else:
+            mode = 'listen'
+    except IndexError:
+        print('После параметра \'-m\' должен быть указан режим работы')
+        return None, None
+
+    return address, port, mode
